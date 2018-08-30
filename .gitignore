@@ -1,0 +1,22 @@
+#ignore python modules
+*.pyc
+#vim swap
+*.swp
+*.sw*
+#spell check backups
+*.bak
+#latex output
+*.aux
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nlo
+*.nls
+*.out
+*.toc
+*.xwm
