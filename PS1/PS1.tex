@@ -1,0 +1,45 @@
+\documentclass[12pt, flushleft]{article}
+\newcommand{\Class}{APM 522}
+\newcommand{\AuthorName}{Emilio E. Torres}
+\newcommand\TitleText{Problem Set 1}
+\newcommand{\duedate}{August 29, 2018}
+%=========================================================================%
+% Pull in the preamble                                                    %
+%=========================================================================%
+\input{../../common-LaTeX/preamble.tex}
+%\setcounter{secnumdepth}{0}
+%-------------------------------------------------------------------------%
+%Equation Counter                                                         %
+%-------------------------------------------------------------------------%
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand\theequation{\arabic{section}.\arabic{equation}}
+%=========================================================================%
+%starting the document                                                    %
+%=========================================================================%
+\begin{document}
+    \input{../../common-latex/title}
+    %=====================================================================%
+    % Main Matter                                                         %
+    %=====================================================================%
+    \setcounter{page}{1}
+    \fancyfoot[R]{Page \thepage{} of \pageref{LastPage}}
+
+\section{Problem 1}
+    \input{Problems/P1.tex}
+    \cleardoublepage
+\section{Problem 2}
+    \input{Problems/P2.tex}
+    \cleardoublepage
+\section{Problem 3}
+    \input{Problems/P3.tex}
+    \cleardoublepage
+\section{Problem 4}
+    \input{Problems/P4.tex}
+    \cleardoublepage
+\section{Problem 5}
+    \input{Problems/P5.tex}
+
+
+\end{document}
