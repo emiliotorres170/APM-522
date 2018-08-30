@@ -1,0 +1,102 @@
+\newcommand{\uderv}[2]{u_{#1}^{#2}}
+\newcommand{\centraldif}[1]{\uderv{i+1}{#1}-2\uderv{i}{#1}+\uderv{i-1}{#1}}
+Starting with the Trapezoidal Rule:
+\begin{equation}
+    \uderv{i}{n+1} = \uderv{i}{n} + \frac{\Dt{}}{2\Dx{2}} \left(\centraldif{n} + \centraldif{n+1} \right)  + \Dt{} \tau
+    \label{eq:p5-1}
+\end{equation}
+Next we expand the right hand about $t$ and the left hand side about $i$,
+\begin{subequations}
+    \begin{equation}
+        \uderv{i}{n+1} = \uderv{i}{n} + \Dt{} \uderv{i,t}{n} + \frac{\Dt{2}}{2} \uderv{i,tt}{n} + \frac{\Dt{3}}{6} \uderv{i,ttt}{n} + \HOTs
+        \label{eq:p5-2-1}
+    \end{equation}
+    \begin{equation}
+        \uderv{i+1}{n} = \uderv{i}{n} + \Dx{} \uderv{i,x}{n} + \frac{\Dx{2}}{2} \uderv{i,xx}{n} + \frac{\Dx{3}}{6} \uderv{i,xxx}{n} + \frac{\Dx{4}}{24} \uderv{i,xxxx}{n} + \HOTs
+        \label{eq:p5-2-2}
+    \end{equation}
+    \begin{equation}
+        \uderv{i-1}{n} = \uderv{i}{n} - \Dx{} \uderv{i,x}{n} + \frac{\Dx{2}}{2} \uderv{i,xx}{n} - \frac{\Dx{3}}{6} \uderv{i,xxx}{n} + \frac{\Dx{4}}{24} \uderv{i,xxxx}{n} \pm \HOTs
+        \label{eq:p5-2-3}
+    \end{equation}
+    \begin{equation}
+        \uderv{i+1}{n+1} = \uderv{i}{n+1} + \Dx{} \uderv{i,x}{n+1} + \frac{\Dx{2}}{2} \uderv{i,xx}{n+1} + \frac{\Dx{3}}{6} \uderv{i,xxx}{n+1} + \frac{\Dx{4}}{24} \uderv{i,xxxx}{n+1} + \HOTs
+        \label{eq:p5-2-4}
+    \end{equation}
+    \begin{equation}
+        \uderv{i-1}{n+1} = \uderv{i}{n+1} - \Dx{} \uderv{i,x}{n+1} + \frac{\Dx{2}}{2} \uderv{i,xx}{n+1} - \frac{\Dx{3}}{6} \uderv{i,xxx}{n+1} + \frac{\Dx{4}}{24} \uderv{i,xxxx}{n+1} \pm \HOTs
+        \label{eq:p5-2-5}
+    \end{equation}
+    \label{eq:p5-2}
+\end{subequations}                                    
+
+Note that the subscript notation contains both the spatial grid point and the partial derivative
+i.e., $\uderv{i,t}{n}$ means take the partial derivative with respect to $t$ at grid point $i$ and
+time-step $n$.  Next Eqn.~(\ref{eq:p5-2}) is substituted into Eqn.~(\ref{eq:p5-1}) and all like
+terms are combined giving,
+\begin{equation}
+    \begin{split}
+        \uderv{i}{n} + & \Dt{} \uderv{i,t}{n} +  \frac{\Dt{2}}{2} \uderv{i,tt}{n} + \frac{\Dt{3}}{6} \uderv{i,ttt}{n} + \HOTs =  \\
+        & \uderv{i}{n} + \frac{\Dt{}}{2\Dx{2}} \left( \Dx{2} \uderv{i,xx}{n} + \frac{\Dx{4}}{12} \uderv{i,xxxx}{n} + \Dx{2} \uderv{i,xx}{n+1} + \frac{\Dx{4}}{12} \uderv{i,xxxx}{n+1} + \HOTs \right) + \Dt{} \tau
+    \end{split}
+    \label{eq:p5-3}
+\end{equation}
+Furthermore the terms inside the parentheses of the left hand side can be expressed as the partial
+derivative terms that appear on the right hand side,
+\begin{subequations}
+    \begin{equation}
+        \uderv{i,xx}{n} = \uderv{i,t}{n}
+        \label{eq:p5-4-1}
+    \end{equation}
+    \begin{equation}
+        \begin{split}
+            \uderv{i,xx}{n+1}  & = \uderv{i,xx}{n} + \Dt{} \uderv{i,xxt}{n} + \frac{\Dt{2}}{2} \uderv{i,xxtt}{n} + \HOTs \\
+                               & = \uderv{i,t}{n} + \Dt{} \uderv{i,tt}{n} + \frac{\Dt{2}}{2} \uderv{i,ttt}{n} + \HOTs \\ 
+        \end{split}
+        \label{eq:p5-4-2}
+    \end{equation}
+    \begin{equation}
+        \uderv{i,xxxx}{n+1} = \uderv{i,xxxx}{n} + \HOTs
+        \label{eq:p5-4-3}
+    \end{equation}
+        \label{eq:p5-4}
+\end{subequations}
+Substituting in Eqn.~(\ref{eq:p5-4}) into Eqn.~(\ref{eq:p5-3}) gives
+\begin{equation}
+    \begin{split}
+        \uderv{i}{n} + & \Dt{} \uderv{i,t}{n} +  \frac{\Dt{2}}{2} \uderv{i,tt}{n} + \frac{\Dt{3}}{6} \uderv{i,ttt}{n} + \HOTs =  \\
+        & \uderv{i}{n} + \frac{\Dt{}}{2\Dx{2}} \Big(\Dx{2} \uderv{i,t}{n} + \frac{\Dx{4}}{12} \uderv{i,xxxx}{n} + \Dx{2} \uderv{i,t}{n} + \\
+         & \Dx{2} \Dt{} \uderv{i,tt}{n} + \frac{\Dx{2} \Dt{2}}{2} \uderv{i,ttt}{n} + \frac{\Dx{4}}{12} \uderv{i,xxxx}{n} + \HOTs \Big) + \Dt{} \tau
+    \end{split}
+    \label{eq:p5-5}
+\end{equation}
+Combing like terms produces
+\begin{equation}
+    \begin{split}
+        \uderv{i}{n} +  & \Dt{} \uderv{i,t}{n} +  \frac{\Dt{2}}{2} \uderv{i,tt}{n} + \frac{\Dt{3}}{6} \uderv{i,ttt}{n} + \HOTs =  \\
+                        & \uderv{i}{n} + \Dt{} \uderv{i,t}{n} + \frac{\Dt{2}}{2} \uderv{i,tt}{n} + \frac{\Dt{3}}{4} \uderv{i,ttt}{n} +\frac{\Dx{2}}{12} \uderv{i,xxxx}{n} + \HOTs + \Dt{} \tau
+    \end{split}
+    \label{eq:p5-6}
+\end{equation}
+Next we can solve for the LTE ($\Dt \tau$) by subtracting the left hand side from the right hand side, namely
+\begin{equation}
+    \tau \Dt{} = -\frac{\Dt{3}}{12}\uderv{i,ttt}{n} - \frac{\Dt{} \Dx{2}}{12} \uderv{i,xxxx}{n}
+    \label{eq:p5-7}
+\end{equation}
+thus
+\begin{equation}
+    \tau = -\frac{\Dt{2}}{12}\uderv{i,ttt}{n} - \frac{\Dx{2}}{12} \uderv{i,xxxx}{n} = c_{1} \Dt{2} + c_{2} \Dx{2}
+    \label{eq:p5-8}
+\end{equation}
+Therefore,
+\begin{subequations}
+    \begin{equation}
+        c_{1} = -\frac{1}{12}\uderv{i,ttt}{n}
+        \label{eq:p5-9-1}
+    \end{equation}
+    \begin{equation}
+        c_{2} = -\frac{1}{12}\uderv{i,xxxx}{n}
+        \label{eq:p5-9-2}
+    \end{equation}
+\end{subequations}
+

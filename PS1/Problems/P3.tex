@@ -1,0 +1,53 @@
+\newcommand{\fj}{f_{j}}
+\newcommand{\fjp}[1]{f_{j+#1}}
+\newcommand{\fjm}[1]{f_{j-#1}}
+\newcommand{\fderv}[2]{#1^{\left( #2 \right)}}
+\renewcommand{\findif}{\left(\dv{f}{x}\right)_{j} \approx \frac{1}{\Dx{}} \left[-\frac{1}{12}\fjp{2} + \frac{2}{3} \fjp{1} - \frac{2}{3} \fjm{1} + \frac{1}{12} \fjm{2} \right]}
+Start by taking the TS of each of the four stencil points about $j$,
+\begin{subequations}
+    \begin{equation}
+        \fjp{2} = \fj + 2\Dx{} \fj^{\prime} + 2\Dx{2} \fj^{\prime \prime} + \frac{4}{3} \Dx{3} \fj^{\prime \prime \prime} + \frac{2}{3} \Dx{4} \fderv{\fj}{4} + \frac{4}{15} \Dx{5} \fderv{\fj}{5} + \HOTs
+    \label{eq:p3-1a}
+    \end{equation}
+    \begin{equation}
+        \fjp{1} = \fj + \Dx{} \fj^{\prime} + \frac{1}{2}\Dx{2} \fj^{\prime \prime} + \frac{1}{6} \Dx{3} \fj^{\prime \prime \prime} + \frac{1}{24} \Dx{4} \fderv{\fj}{4} + \frac{1}{120} \Dx{5} \fderv{\fj}{5} + \HOTs
+    \label{eq:p3-1b}
+    \end{equation}
+    \begin{equation}
+        \fjm{1} = \fj - \Dx{} \fj^{\prime} + \frac{1}{2}\Dx{2} \fj^{\prime \prime} - \frac{1}{6} \Dx{3} \fj^{\prime \prime \prime} + \frac{1}{24} \Dx{4} \fderv{\fj}{4} - \frac{1}{120} \Dx{5} \fderv{\fj}{5} \pm \HOTs
+    \label{eq:p3-1c}
+    \end{equation}
+    \begin{equation}
+        \fjm{2} = \fj - 2\Dx{} \fj^{\prime} + 2\Dx{2} \fj^{\prime \prime} - \frac{4}{3} \Dx{3} \fj^{\prime \prime \prime} + \frac{2}{3} \Dx{4} \fderv{\fj}{4} - \frac{4}{15} \Dx{5} \fderv{\fj}{5} \pm \HOTs
+    \label{eq:p3-1d}
+    \end{equation}
+\end{subequations}
+Substituting Eqns.~(\ref{eq:p3-1a}-\ref{eq:p3-1d}) into the finite difference approximation gives,
+\begin{equation}
+    \begin{split}
+        & \findif = \\ 
+        & \frac{1}{\Dx{}} \Bigg[-\frac{1}{12}\left( \fj + 2\Dx{} \fj^{\prime} + 2\Dx{2} \fj^{\prime \prime} + \frac{4}{3} \Dx{3} \fj^{\prime \prime \prime} + \frac{2}{3} \Dx{4} \fderv{\fj}{4} + \frac{4}{15} \Dx{5} \fderv{\fj}{5} + \HOTs \right)\\
+        & + \frac{2}{3}     \left(  \fj + \Dx{} \fj^{\prime} + \frac{1}{2}\Dx{2} \fj^{\prime \prime} + \frac{1}{6} \Dx{3} \fj^{\prime \prime \prime} + \frac{1}{24} \Dx{4} \fderv{\fj}{4} + \frac{1}{120} \Dx{5} \fderv{\fj}{5} + \HOTs \right)\\ 
+        & - \frac{2}{3}     \left(  \fj - \Dx{} \fj^{\prime} + \frac{1}{2}\Dx{2} \fj^{\prime \prime} - \frac{1}{6} \Dx{3} \fj^{\prime \prime \prime} + \frac{1}{24} \Dx{4} \fderv{\fj}{4} - \frac{1}{120} \Dx{5} \fderv{\fj}{5} \pm \HOTs \right)\\
+        & + \frac{1}{12}    \left(  \fj - 2\Dx{} \fj^{\prime} + 2\Dx{2} \fj^{\prime \prime} - \frac{4}{3} \Dx{3} \fj^{\prime \prime \prime} + \frac{2}{3} \Dx{4} \fderv{\fj}{4} - \frac{4}{15} \Dx{5} \fderv{\fj}{5} \pm \HOTs\right)\Bigg]  
+    \end{split}
+    \label{eq:p3-2}
+\end{equation}
+Combining like terms in Eqn.~(\ref{eq:p3-2}) one gets the following,
+\begin{equation}
+    \begin{split}
+        & \findif =  \\
+        & \frac{1}{\Dx{}} \left(\Dx{} \fj^{\prime} - \frac{1}{30} \Dx{5} \fderv{\fj}{5} + \HOTs \right)
+    \end{split}
+    \label{eq:p3-3}
+\end{equation}
+thus
+\begin{equation}
+    \findif = \fj^{\prime} - \frac{1}{30} \Dx{4} \fderv{\fj}{5}
+    \label{eq:p3-4}
+\end{equation}
+Clearly from Eqn.~(\ref{eq:p3-4}) the finite difference approximation is of \Order{4}.
+
+        
+        
+

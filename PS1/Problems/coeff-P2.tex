@@ -1,0 +1,65 @@
+\newcommand{\fii}{f_{i}}
+\newcommand{\fipone}{f_{i+1}}
+\newcommand{\fiptwo}{f_{i+2}}
+\newcommand{\fimone}{f_{i-1}}
+\newcommand{\fimtwo}{f_{i-2}}
+\newcommand{\Dx}[1]{{\Delta x}^{#1}}
+\newcommand{\ac}[1]{a_{#1}}
+\newcommand{\Order}[1]{$O\left( #1 \right)$}
+
+
+\section{Problem 2}
+
+The three-point central difference formula for $\pdv*{f}{x}$ and $\pdv*[2]{f}{x}$ order of accuracy were
+verified by deriving the formulas from the Taylor Series (TS) and solving a system of linear
+equations.
+
+\subsection{First derivative}
+
+First write TS expansion for every stencil point:
+\begin{subequations}
+    \begin{equation}
+        \fimone = \fii - \Delta x \fii ^{ \prime } + \frac{ \Dx{2} }{ 2 } \fii^{ \prime \prime }- \frac{ \Dx{3}  }{ 6 } \fii^{ \prime \prime \prime }+ \ldots
+    \end{equation}
+    \begin{equation}
+        \fii = \fii
+    \end{equation}
+    \begin{equation}
+        \fipone = \fii + \Delta x \fii ^{ \prime } + \frac{ \Dx{2} }{ 2 } \fii ^{ \prime \prime } + \frac{ \Dx{3}  }{ 6 } \fii^{ \prime \prime \prime } + \ldots
+    \end{equation}
+    \label{eq:PS-2a-TS}
+\end{subequations}
+
+Multiplying by linear coefficients gives:
+\begin{equation}
+    \begin{aligned}
+        \fii ^{\prime} + \ac{0} \fii + \ac{1} \fipone + \ac{2} \fimone = & \left( \ac{0} + \ac{1} + \ac{2} \right) \fii + \left( 1 + \ac{1} \Dx{} - \ac{2} \Dx{{}} \right) \fii^{\prime} \\ 
+        & + \left( \frac{ \ac{1} \Dx{2} }{ 2 } + \frac{ \ac{2} \Dx{2} }{2} \right) \fii^{\prime \prime} + \left( \frac{ \ac{1} \Dx{3} }{6} - \frac{ \ac{1} \Dx{3}}{6} \right) \fii^{\prime \prime \prime}
+    \end{aligned}
+    \label{eq:PS-2a-coeff}
+\end{equation}
+Setting the first three terms in parenthesis on the RHS to zero and solving gives:
+\begin{subequations}
+    \begin{equation}
+        \ac{0} + \ac{1} + \ac{2} = 0
+    \end{equation}
+    \begin{equation}
+        1 + \ac{1} \Dx{} + \ac{2} \Dx{} = 0
+    \end{equation}
+    \begin{equation}
+        \frac{ \ac{1} \Dx{2} }{ 2 } + \frac{ \ac{2} \Dx{2} }{2} = 0
+    \end{equation}
+    \label{eq:PS-2a-set-of-eqns}
+\end{subequations}
+thus $\ac{0} = 0$, $\ac{1} = -1/2\Dx{}$, and $\ac{2} = 1/2\Dx{}$. Substituting $\ac{0}$, $0\ac{1}$,m
+and $\ac{2}$ into Eqn.~(\ref{eq:PS-2a-coeff}) and re-arranging gives:
+\begin{equation}
+    \fii ^{\prime} + \frac{1}{6} \Dx{2} \fii ^{\prime \prime \prime} = \frac{\fipone - \fimone}{2 \Dx{}}
+    \label{eq:PS-2a-final}
+\end{equation}
+thus the FD scheme is of \Order{2}.
+
+
+    
+
+

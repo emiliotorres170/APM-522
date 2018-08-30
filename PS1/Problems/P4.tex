@@ -1,0 +1,122 @@
+\newcommand{\Keq}[1]{\frac{1}{\sqrt{4 \pi \kappa t}} \exp\left( -\frac{#1^{2}}{4 \kappa t} \right)}
+\newcommand{\kxt}{K\left(x,t\right)}
+\newcommand{\kgen}[2]{K\left(#1,#2\right)}
+\newcommand{\uxt}{u\left(x,t\right)}
+\newcommand{\uo}{u_{0}\left( y \right)}
+Start by showing that $\kxt$ satisfies the general heat equation which is expressed in index
+notation below
+\begin{equation}
+    \pdv{u}{t} = \pdv{}{x_{j}}\left( \kappa \pdv{u}{x_{j}} \right)
+    \label{eq:p4-1}
+\end{equation}
+which for 1-D and a constant diffusivity coefficient $\kappa$ Eqn~(\ref{eq:p4-1}) reduces to 
+\begin{equation}
+    \pdv{u}{t} = \kappa \pdv[2]{u}{x}
+    \label{eq:p4-2}
+\end{equation}
+Substituting $\kxt$
+\begin{equation}
+    \Keq{x}
+    \label{eq:p4-3}
+\end{equation}
+into Eqn.~(\ref{eq:p4-2}) gives the following,
+\begin{equation}
+    \pdv{K}{t} = \frac{ -\exp\left(\frac{x^{2}}{4 \kappa t}\right) \left(2 \kappa t - x^{2}\right) }{8 \kappa t^{2} \sqrt{\kappa \pi t}}
+    \label{eq:p4-4}
+\end{equation}
+\begin{equation}
+    \pdv{K}{x} = \frac{ -x \exp\left(\frac{x^{2}}{4 \kappa t}\right) }{4 \sqrt{\pi} \left(\kappa t \right)^{3/2}}
+    \label{eq:p4-5}
+\end{equation}
+\begin{equation}
+    \pdv[2]{K}{x}  = \pdv{}{x}\left(\pdv{K}{x}\right) = \exp\left(\frac{x^{2}}{4 \kappa t}\right)
+    \left(\frac{x^{2}}{8\sqrt{\pi} \left(\kappa t \right)^{5/2}} - \frac{1}{ 4\sqrt{\pi} \left(\kappa t \right)^{3/2} } \right)
+    \label{eq:p4-6}
+\end{equation}
+thus
+\begin{equation}
+    \kappa \pdv[2]{K}{x} = \frac{ -\exp\left(\frac{x^{2}}{4 \kappa t}\right) \left(2 \kappa t - x^{2}\right) }{8 \kappa t^{2} \sqrt{\kappa \pi t}}  = \pdv{K}{t}
+    \label{eq:p4-7}
+\end{equation}
+Therefore $\kxt$ satisfies Eqn.~(\ref{eq:p4-2}). Next we show that $\uxt$, 
+\begin{equation}
+    \uxt = \int_{-\infty}^{\infty} \kgen{x-y}{t}\uo dy 
+    \label{eq:p4-8}
+\end{equation}
+also satisfies the heat the 1-D linear heat equation. We start by substituting in
+Eqn.~(\ref{eq:p4-8}) into each of the two partial derivatives, namely
+\begin{subequations}
+\begin{equation}
+    \pdv{}{t} \int_{-\infty}^{\infty} \kgen{x-y}{t}\uo dy 
+    \label{eq:p4-9}
+\end{equation}
+\begin{equation}
+ \kappa \pdv[2]{}{x} \int_{-\infty}^{\infty} \kgen{x-y}{t}\uo dy 
+    \label{eq:p4-9-2}
+\end{equation}
+\end{subequations}
+Next we switch the order of the partial derivative and integration operators giving,
+\begin{subequations}
+\begin{equation}
+    \int_{-\infty}^{\infty} \pdv{}{t}  \kgen{x-y}{t}\uo  dy  
+    \label{eq:p4-10-1}
+\end{equation}
+\begin{equation}
+    \int_{-\infty}^{\infty} \kappa \pdv[2]{}{x}  \kgen{x-y}{t}\uo  dy   
+    \label{eq:p4-10-2}
+\end{equation}
+    \label{eq:p4-10}
+\end{subequations}
+Since we are not taking any derivative with respect to $y$ in Eqn.~(\ref{eq:p4-10}) we can simply
+treat it as a constant thus
+\begin{subequations}
+\begin{equation}
+    \int_{-\infty}^{\infty}   \kgen{x-y}{t}_{t}\uo  dy  
+    \label{eq:p4-11-1}
+\end{equation}
+\begin{equation}
+    \int_{-\infty}^{\infty} \kappa  \kgen{x-y}{t}_{xx}\uo  dy   
+    \label{eq:p4-11-2}
+\end{equation}
+    \label{eq:p4-11}
+\end{subequations}
+Furthermore, it was shown in Eqn.~(\ref{eq:p4-7}) that $\kxt_{y} = \kappa \kxt_{xx}$ therefore
+\begin{equation}
+    \pdv{\uxt}{t} = \int_{-\infty}^{\infty}   \kgen{x-y}{t}_{t}\uo  dy =
+                    \int_{-\infty}^{\infty} \kappa  \kgen{x-y}{t}_{xx}\uo  dy    
+    = \kappa \pdv[2]{\uxt}{x}
+    \label{eq:p4-12}
+\end{equation}
+thus
+\begin{equation}
+    \pdv{\uxt}{t} = \kappa \pdv[2]{\uxt}{x}
+    \label{eq:p4-13}
+\end{equation}
+
+Lastly we show $\uxt$ satisfies the initial condition of $u\left(x, t= 0\right) = u_{0} \left( x\right)$ 
+by taking limit of $\uxt$ of $t \rightarrow 0$, 
+\begin{equation}
+    u\left(x, t= 0\right) = \lim_{ t \to 0 } \int_{-\infty}^{\infty} K\left(x-y,t\right) \uo dy
+    \label{eq:p4-14}
+\end{equation}
+Recognizing that this gives the (Dirac) delta function which 
+$\int_{-\infty}^{\infty} \delta \left(x-a \right)f(x) = f(a) $ 
+gives,
+\begin{equation}
+    u\left(x, t= 0\right) = \lim_{ t \to 0 } \int_{-\infty}^{\infty} K\left(x-y,t\right) \uo dy =
+    u_{0}\left( x \right)
+    \label{eq:p4-14}
+\end{equation}
+Therefore $\uxt$ satisfies both the partial differential equation and the initial condition
+making it a solution to the 1-D linear heat equation.
+    
+
+
+
+
+
+
+    
+
+
+
